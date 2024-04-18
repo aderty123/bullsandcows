@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class='play_page'>
+    <div class="play_page-name_field">
+        <form method="POST">
+            <input type="hidden" name="player_name" value="players_name">
+            {% csrf_token %}
+            {{ form_player_name }}
+            <input type="submit" class="send-button" value="Change Name"/>
+        </form>
+    </div>
+    <div class="play_page-play_notepad">
+        <div class="play_page-play_notepad-display_field">
+            <ul>
+                {% for number, bull, cow in num_bull_cow %}
+                <li>{{ forloop.counter }}. > Input: {{ number }} Bulls: {{ bull }} Cows: {{ cow }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class='play_page-play_notepad-input_field'>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="digits_input" value="user_guess">
+                {{ form_number_input }}
+                <!-- <input type="number"> -->
+                <input type="submit" class="send-button" value="Play">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
